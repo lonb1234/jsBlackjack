@@ -1,0 +1,67 @@
+body {
+  color: #f5eded;
+  text-align: center;
+  font-family: 'Roboto'
+}
+
+.Header {
+  background-color: black;
+  padding: 3% 3% 3% 3%;
+}
+
+.Main {
+  background-color: #d72323;
+  padding: 4% 3% 4% 3%;
+}
+
+.Footer {
+  background-color: #3e3636;
+  padding: 2% 3% 2% 3%;
+}
+
+/* header */
+.logo {
+  height: 55%;
+  width: 55%;
+}
+
+/* main */
+h1 {
+  font-family: 'Luckiest Guy';
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  padding: 0.2% 0 1% 0;
+}
+
+hr {
+  border: dotted #f5eded 6px;
+  width: 4%;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 1%;
+}
+
+/* footer */
+.sm {
+  padding-left: 1%;
+  color: #f5eded;
+}
+
+.sm:hover {
+  color: #d72323;
+}
+
+.copy {
+  padding-top: 1%;
+  margin-left: 1%;
+  font-size: 1.5rem;
+  font-family: 'Roboto';
+}
