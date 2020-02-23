@@ -121,9 +121,9 @@ function NewGame() {
   var r = confirm("Are you certain you want to start a new game?");
   if (r == true) {
     document.querySelector(".total").innerHTML = "Total money: $250"
-    document.querySelector(".current").innerHTML = "Current bet: $0"}
+    document.querySelector(".current").innerHTML = "Current bet: $0"
     money = 250
-    newgamez()
+    newgamez()}
     // reset randon numberc
 
   }
@@ -201,27 +201,50 @@ function standdraw() {
 
 }}
 
+
+
 function stand(){
   if(cardcounterD>0){
 standdraw()
   if (DScore>Pscore && DScore<21){
     document.querySelector(".winner").innerHTML="Dealer Wins"
     alert("You lost.")
-  setTimeout(function() { newgamez(); }, 2000);}
+
+  setTimeout(function() { newgamez(); }, 700)
+  money=money
+  bet=0
+  document.querySelector(".total").innerHTML = "Total money: $" + money
+  document.querySelector(".current").innerHTML = "Current bet: $" + bet
+  }
     else if(Pscore>DScore && Pscore<21){
       document.querySelector(".winner").innerHTML="Player Wins"
       alert("You win.")
-    setTimeout(function() { newgamez(); }, 2000);}
+    setTimeout(function() { newgamez(); }, 700)
+
+  money=money+(bet*2)
+  bet=0
+  document.querySelector(".total").innerHTML = "Total money: $" + money
+  document.querySelector(".current").innerHTML = "Current bet: $" + bet
+    }
 
       else if (DScore>21){
         document.querySelector(".winner").innerHTML="Player Wins"
         alert("You win.")
-    setTimeout(function() { newgamez(); }, 2000);}
+    setTimeout(function() { newgamez(); }, 700)
+
+    money=money+(bet*2)
+    bet=0
+    document.querySelector(".total").innerHTML = "Total money: $" + money
+    document.querySelector(".current").innerHTML = "Current bet: $" + bet
+    }
         else if (Pscore=DScore){
         document.querySelector(".winner").innerHTML="Draw"
         alert("Draw.")
-    setTimeout(function() { newgamez(); }, 2000);}
-
+    setTimeout(function() { newgamez(); }, 700);}
+    money=money+bet
+    bet=0
+    document.querySelector(".total").innerHTML = "Total money: $" + money
+    document.querySelector(".current").innerHTML = "Current bet: $" + bet
   }}
 
 
