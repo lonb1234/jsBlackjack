@@ -40,63 +40,71 @@ for (i = 1; i < 12; i++) {
   }
 }
 
+// adding scores , function bc often needing it.
+
+function addScoreP(){
+  if (randomNumberB > 10) {
+    randomNumberD = randomNumberB - (randomNumberB - 10)
+  } else {
+    randomNumberD = randomNumberB
+  }
+  Pscore=Pscore+randomNumberD
+
+  document.querySelector(".scoreP ").innerHTML = Pscore
+}
+
+
+
 
 
 
 
 // new game button , fully functional, random backcover on unturned cards, picks a random card for the first card of the dealer and the first 2 of the player.
 
-document.querySelector(".newgame").addEventListener("click", function() {
+ function newgamez() {
+
+   cardcounter=0
+   cardcounter++
+   randomNumberC = 0
+   money = 250
+   bet = 0
+   Pscore=0
+   document.querySelector(".total").innerHTML = "Total money: $250"
+   document.querySelector(".current").innerHTML = "Current bet: $0"
+
+   // set loop
+   for (i = 0; i < 12; i++) {
+     if (i != 0 && i != 6 && i != 7) {
+       randomNumber1 = Math.floor((Math.random() * 4) + 1)
+       document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
+     } else if (i < 1) {
+       rollcard()
+       document.querySelector(".scoreD").innerHTML = randomNumberC
+       if (randomNumberB > 9) {
+         document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+       } else {
+         document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+       }
+     } else {
+       rollcard()
+       addScoreP()
+       if (randomNumberB > 9) {
+         document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+       } else {
+         document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+       }
+     }
+   }}
+
+   function NewGame(){
   // confirm start game
   var r = confirm("Are you certain you want to start a new game?");
   if (r == true) {
-
+newgamez()
     // reset randon numberc
-    cardcounter=0
-    cardcounter++
-    randomNumberC = 0
-    money = 250
-    bet = 0
-    Pscore=0
-    document.querySelector(".total").innerHTML = "Total money: $250"
-    document.querySelector(".current").innerHTML = "Current bet: $0"
 
-    // set loop
-    for (i = 0; i < 12; i++) {
-      if (i != 0 && i != 6 && i != 7) {
-        randomNumber1 = Math.floor((Math.random() * 4) + 1)
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
-      } else if (i < 1) {
-        rollcard()
-        document.querySelector(".scoreD").innerHTML = randomNumberC
-        if (randomNumberB > 9) {
-          document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-        } else {
-          document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-        }
-      } else {
-        rollcard()
-        if (randomNumberB > 10) {
-          randomNumberD = randomNumberB - (randomNumberB - 10)
-        } else {
-          randomNumberD = randomNumberB
-        }
-        Pscore=Pscore+randomNumberD
-
-        document.querySelector(".scoreP ").innerHTML = Pscore
-        if (randomNumberB > 9) {
-          document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-        } else {
-          document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-        }
-      }
-    }
   }
-})
-
-
-
-
+}
 
 
 
@@ -121,46 +129,48 @@ function bets() {
 };
 
 
+function drawhit(){
+  if (randomNumberB > 9) {
+    document.querySelector(".cardp"+(cardcounter+1)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  addScoreP()
+
+
+  } else {
+    document.querySelector(".cardp"+(cardcounter+1)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+addScoreP()
+}}
 
 
 // Hit
 function hit(){
     rollcard()
-
   if (cardcounter==1){
 cardcounter ++
-  if (randomNumberB > 9) {
-    document.querySelector(".cardp3").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-  } else {
-    document.querySelector(".cardp3").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-  }}
-  else if (cardcounter==2){
-    cardcounter ++
-  if (randomNumberB > 9) {
-    document.querySelector(".cardp4").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-  } else {
-    document.querySelector(".cardp4").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-  }}
-  else if (cardcounter==3){
-    cardcounter ++
-  if (randomNumberB > 9) {
-    document.querySelector(".cardp5").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-  } else {
-    document.querySelector(".cardp5").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-  }
-}
 
+drawhit()
+if(Pscore>21)
+{alert("You lose!")
+newgamez()}}
+else if (cardcounter==2){
+cardcounter ++
+drawhit()
+if(Pscore>21)
+{alert("You lose!")
+newgamez()}}
+else if (cardcounter==3){
+cardcounter ++
+drawhit()
+if(Pscore>21)
+{alert("You lose!")
+newgamez()}}
 else if (cardcounter==4){
-  cardcounter ++
-if (randomNumberB > 9) {
-  document.querySelector(".cardp6").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-} else {
-  document.querySelector(".cardp6").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-}
-}
+cardcounter ++
+drawhit()
+if(Pscore>21)
+{alert("You lose!")
+newgamez()}}}
 
 
-}
 
 
 //stand - draw cards loop till 21+ if 21+ win, compare player score w dealer score if below
