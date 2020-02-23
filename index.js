@@ -1,8 +1,4 @@
-// roll random number (1+"-" roll random number1 + ".png")  if double reroll
-
 // variables
-
-
 var money = 250
 var bet = 0
 var randomNumberA = 0
@@ -22,21 +18,15 @@ var deal = parseInt(document.querySelector(".scoreD").innerHTML)
 var player = document.querySelector(".scoreP").innerHTML
 
 
+// function rolls for cards, number 1-4 for color and 1-13 for card
 function rollcard() {
-  // // randomnumberc to 0
-  // randomNumberC=randomNumberC*0
-
   randomNumberA = Math.floor((Math.random() * 4) + 1)
   randomNumberB = Math.floor((Math.random() * 13) + 1)
-  // randomnumber to 10 for +10 cards
   if (randomNumberB > 10) {
     randomNumberC = randomNumberB - (randomNumberB - 10)
   } else {
     randomNumberC = randomNumberB
   }
-
-
-  // document.querySelector(".scoreP").innerHTML=randomNumberD
 }
 
 
@@ -221,17 +211,19 @@ function standdraw() {
 function stand() {
   if (cardcounterD > 0) {
     standdraw()
-    if (DScore = 21 && insured > 0) {
-      alert("You lost.")
 
-      setTimeout(function() {
-        newgamez();
-      }, 700)
-      money = money + (bet * 0.75)
-      bet = 0
-      document.querySelector(".total").innerHTML = "Total money: $" + money
-      document.querySelector(".current").innerHTML = "Current bet: $" + bet
-    } else if (DScore > Pscore && DScore < 21) {
+     if (DScore > Pscore && DScore <= 21) {
+        if (DScore = 21 && insured > 0) {
+         alert("You lost.")
+
+         setTimeout(function() {
+           newgamez();
+         }, 700)
+         money = money + (bet * 0.75)
+         bet = 0
+         document.querySelector(".total").innerHTML = "Total money: $" + money
+         document.querySelector(".current").innerHTML = "Current bet: $" + bet
+       } else{
       document.querySelector(".winner").innerHTML = "Dealer Wins"
       alert("You lost.")
 
@@ -242,7 +234,9 @@ function stand() {
       bet = 0
       document.querySelector(".total").innerHTML = "Total money: $" + money
       document.querySelector(".current").innerHTML = "Current bet: $" + bet
-    } else if (Pscore > DScore && Pscore < 21) {
+    }}
+
+    else if (Pscore > DScore && Pscore <= 21) {
       document.querySelector(".winner").innerHTML = "Player Wins"
       alert("You win.")
       setTimeout(function() {
