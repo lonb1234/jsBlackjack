@@ -19,12 +19,14 @@ function rollcard(){
   // randomNumberC=randomNumberC*0
 
   randomNumberA = Math.floor((Math.random() * 4) + 1)
-  // randomnumber to 10 for +10 cards
-//   if (randomNumberB>10){
-// randomNumberC=randomNumberB-(randomNumberB-10)}
-
   randomNumberB = Math.floor((Math.random() * 13) + 1)
-  // document.querySelector(".scoreP").innerHTML=randomNumberC
+  // randomnumber to 10 for +10 cards
+   if (randomNumberB>10){
+ randomNumberC=randomNumberB-(randomNumberB-10)}
+  else{randomNumberC=randomNumberB}
+
+
+   // document.querySelector(".scoreP").innerHTML=randomNumberD
 }
 
 
@@ -43,30 +45,69 @@ for (i = 1; i < 12; i++) {
 // new game button , fully functional, random backcover on unturned cards, picks a random card for the first card of the dealer and the first 2 of the player.
 
 document.querySelector(".newgame").addEventListener("click", function() {
-
+// confirm start game
     var r=confirm("Are you certain you want to start a new game?");
     if (r == true){
+
+      // reset randon numberc
+      randomNumberC=0
+      money = '250'
+      bet = '0'
+      document.querySelector(".total").innerHTML = "Total money: $250"
+      document.querySelector(".current").innerHTML = "Current bet: $0"
+
+      // set loop
   for (i = 0; i < 12; i++) {
-    if (i != 0 && i!=6 && i!=7) {
+    // skip array 0 6 and 7 for cards dealer + player
+      if (i != 0 && i!=6 && i!=7) {
+      // get the first number for the card unturned
       randomNumber1 = Math.floor((Math.random() * 4) + 1)
+      // add the number to the src
       document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
     }
-    else {
+    // first card should be turned for dealer
+    else if (i <  1){
+      // pick the card
       rollcard()
+      // add the number to score dealer
+      document.querySelector(".scoreD").innerHTML=randomNumberC
+      // if number more than 9
       if (randomNumberB>9){
-      document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-"+randomNumberB + ".png")}
-      else{
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-0"+randomNumberB + ".png")
-      };
-
-
-
+        // add the whole number , no need for the 0
+      document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-"+randomNumberB + ".png");
     }
-    money = '250'
-    bet = '0'
-    document.querySelector(".total").innerHTML = "Total money: $250"
-    document.querySelector(".current").innerHTML = "Current bet: $0"}
-  }})
+    //otherwise only number 6 and 7 left, first 2 cards for the player
+      else{
+        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-0"+randomNumberB + ".png");
+      }
+
+
+
+// else {
+//   rollcard()
+//   if (randomNumberB>9){
+//   document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-"+randomNumberB + ".png")
+//
+// }
+//   else{
+//     document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-0"+randomNumberB + ".png")
+//   }
+}else{rollcard()
+// add the number to score dealer
+document.querySelector(".scoreP").innerHTML=randomNumberC
+// if number more than 9
+if (randomNumberB>9){
+  // add the whole number , no need for the 0
+document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-"+randomNumberB + ".png");
+}
+//otherwise only number 6 and 7 left, first 2 cards for the player
+else{
+  document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA +"-0"+randomNumberB + ".png");
+}
+}}}})
+
+
+
 
 
 
