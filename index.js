@@ -80,20 +80,18 @@ function addScoreD() {
 
 // new game button , fully functional, random backcover on unturned cards, picks a random card for the first card of the dealer and the first 2 of the player.
 
-function newgamez() {
-cardcounterD=1
-cardcounterD++
-  cardcounter = 0
-  cardcounter++
-  randomNumberC = 0
-  money = 250
-  bet = 0
-  Pscore = 0
-  DScore=0
-  document.querySelector(".total").innerHTML = "Total money: $250"
-  document.querySelector(".current").innerHTML = "Current bet: $0"
 
   // set loop
+  function newgamez(){
+  cardcounterD=1
+  cardcounterD++
+    cardcounter = 0
+    cardcounter++
+    randomNumberC = 0
+
+    bet = 0
+    Pscore = 0
+    DScore=0
   for (i = 0; i < 12; i++) {
     if (i != 0 && i != 6 && i != 7) {
       randomNumber1 = Math.floor((Math.random() * 4) + 1)
@@ -122,11 +120,14 @@ function NewGame() {
   // confirm start game
   var r = confirm("Are you certain you want to start a new game?");
   if (r == true) {
+    document.querySelector(".total").innerHTML = "Total money: $250"
+    document.querySelector(".current").innerHTML = "Current bet: $0"}
+    money = 250
     newgamez()
     // reset randon numberc
 
   }
-}
+
 
 
 
@@ -170,13 +171,13 @@ function hit() {
     }
     if (Pscore > 21) {
       alert("You lose!")
-      newgamez()
+      setTimeout(function() { newgamez(); }, 2000);}
     }
   }
   if (cardcounter == 5) {
     stand()
   }
-}
+
 
 
 
@@ -201,22 +202,27 @@ function standdraw() {
 }}
 
 function stand(){
+  if(cardcounterD>0){
 standdraw()
   if (DScore>Pscore && DScore<21){
     document.querySelector(".winner").innerHTML="Dealer Wins"
-    alert("You lost.")}
+    alert("You lost.")
+  setTimeout(function() { newgamez(); }, 2000);}
     else if(Pscore>DScore && Pscore<21){
       document.querySelector(".winner").innerHTML="Player Wins"
-      alert("You win.")}
+      alert("You win.")
+    setTimeout(function() { newgamez(); }, 2000);}
 
       else if (DScore>21){
         document.querySelector(".winner").innerHTML="Player Wins"
-        alert("You win.")}
+        alert("You win.")
+    setTimeout(function() { newgamez(); }, 2000);}
         else if (Pscore=DScore){
         document.querySelector(".winner").innerHTML="Draw"
-        alert("Draw.")}
-      
-    }
+        alert("Draw.")
+    setTimeout(function() { newgamez(); }, 2000);}
+
+  }}
 
 
 
