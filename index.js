@@ -16,7 +16,8 @@ DScore=0
 cardcounter = 0
 cardcounterD= 0
 var randomD=0
-
+var insured=0
+cardhit=0
 var deal=parseInt(document.querySelector(".scoreD").innerHTML)
 var player=document.querySelector(".scoreP").innerHTML
 
@@ -80,7 +81,29 @@ function addScoreD() {
 
 // new game button , fully functional, random backcover on unturned cards, picks a random card for the first card of the dealer and the first 2 of the player.
 
-
+function game(){
+for (i = 0; i < 12; i++) {
+if (i != 0 && i != 6 && i != 7) {
+  randomNumber1 = Math.floor((Math.random() * 4) + 1)
+  document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
+} else if (i < 1) {
+  rollcard()
+  addScoreD()
+  if (randomNumberB > 9) {
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  } else {
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+  }
+} else {
+  rollcard()
+  addScoreP()
+  if (randomNumberB > 9) {
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  } else {
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+  }}
+}
+}
   // set loop
   function newgamez(){
   cardcounterD=1
@@ -92,28 +115,9 @@ function addScoreD() {
     bet = 0
     Pscore = 0
     DScore=0
-  for (i = 0; i < 12; i++) {
-    if (i != 0 && i != 6 && i != 7) {
-      randomNumber1 = Math.floor((Math.random() * 4) + 1)
-      document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
-    } else if (i < 1) {
-      rollcard()
-      addScoreD()
-      if (randomNumberB > 9) {
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-      } else {
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-      }
-    } else {
-      rollcard()
-      addScoreP()
-      if (randomNumberB > 9) {
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-      } else {
-        document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-      }
-    }
-  }
+    insured=0
+    cardhit=0
+  game()
 }
 
 function NewGame() {
@@ -134,7 +138,7 @@ function NewGame() {
 //bet functionality, targets all the buttons. checks for no more than $500 a bet and check for enough remaining money.
 
 function bets() {
-
+if (cardhit<1){
   if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
     money = money - parseInt(event.target.innerHTML)
 
@@ -143,12 +147,13 @@ function bets() {
 
     document.querySelector(".total").innerHTML = "Total money: $" + money
     document.querySelector(".current").innerHTML = "Current bet: $" + bet
+
   } else if (money < parseInt(event.target.innerHTML)) {
     alert("You don't have enough money.")
   } else {
     alert("You can't bet higher than $500.")
   }
-
+}
 };
 
 
@@ -157,6 +162,7 @@ function bets() {
 
 // Hit
 function hit() {
+  cardhit=1
   rollcard()
   if (cardcounter <= 4 && cardcounter > 0) {
     cardcounter++
@@ -170,8 +176,12 @@ function hit() {
       addScoreP()
     }
     if (Pscore > 21) {
-      alert("You lose!")
-      setTimeout(function() { newgamez(); }, 2000);}
+      alert("You lost.")
+      setTimeout(function() { newgamez(); }, 700)
+      money=money
+      bet=0
+      document.querySelector(".total").innerHTML = "Total money: $" + money
+      document.querySelector(".current").innerHTML = "Current bet: $" + bet;}
     }
   }
   if (cardcounter == 5) {
@@ -206,7 +216,15 @@ function standdraw() {
 function stand(){
   if(cardcounterD>0){
 standdraw()
-  if (DScore>Pscore && DScore<21){
+if (DScore=21 && insured>0){
+alert("You lost.")
+
+setTimeout(function() { newgamez(); }, 700)
+money=money+(bet*0.75)
+bet=0
+document.querySelector(".total").innerHTML = "Total money: $" + money
+document.querySelector(".current").innerHTML = "Current bet: $" + bet}
+  else if (DScore>Pscore && DScore<21){
     document.querySelector(".winner").innerHTML="Dealer Wins"
     alert("You lost.")
 
@@ -257,7 +275,18 @@ standdraw()
 
 
 // insurance
+function insurance2(){
+  if (DScore=1 && insured<1){
+  if (money > (bet*0.5)){
+  money = money - (bet*0.5)
+bet = bet + (bet*0.5)
+insured=1
 
+  document.querySelector(".total").innerHTML = "Total money: $" + money
+
+} else if (money < (bet*0.5)) {
+  alert("You don't have enough money.")
+}}}
 
 
 
