@@ -12,7 +12,7 @@ var player = 0
 var randomNumberC = 0
 var randomNumberD = 0
 pScore=0
-
+cardcounter=0
 
 function rollcard() {
   // // randomnumberc to 0
@@ -52,6 +52,8 @@ document.querySelector(".newgame").addEventListener("click", function() {
   if (r == true) {
 
     // reset randon numberc
+    cardcounter=0
+    cardcounter++
     randomNumberC = 0
     money = 250
     bet = 0
@@ -117,3 +119,53 @@ function bets() {
   }
 
 };
+
+
+
+
+// Hit
+function hit(){
+    rollcard()
+
+  if (cardcounter==1){
+cardcounter ++
+  if (randomNumberB > 9) {
+    document.querySelector(".cardp3").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  } else {
+    document.querySelector(".cardp3").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+  }}
+  else if (cardcounter==2){
+    cardcounter ++
+  if (randomNumberB > 9) {
+    document.querySelector(".cardp4").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  } else {
+    document.querySelector(".cardp4").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+  }}
+  else if (cardcounter==3){
+    cardcounter ++
+  if (randomNumberB > 9) {
+    document.querySelector(".cardp5").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+  } else {
+    document.querySelector(".cardp5").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+  }
+}
+
+else if (cardcounter==4){
+  cardcounter ++
+if (randomNumberB > 9) {
+  document.querySelector(".cardp6").setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+} else {
+  document.querySelector(".cardp6").setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+}
+}
+
+
+}
+
+
+//stand - draw cards loop till 21+ if 21+ win, compare player score w dealer score if below
+
+// Split
+
+
+// insurance
