@@ -15,7 +15,7 @@ pScore = 0
 DScore=0
 cardcounter = 0
 cardcounterD= 0
-randomD=0
+var randomD=0
 
 var deal=parseInt(document.querySelector(".scoreD").innerHTML)
 var player=document.querySelector(".scoreP").innerHTML
@@ -38,22 +38,7 @@ function rollcard() {
   // document.querySelector(".scoreP").innerHTML=randomNumberD
 }
 
-function rollcardD() {
-  // // randomnumberc to 0
-  // randomNumberC=randomNumberC*0
 
-  randomNumberA = Math.floor((Math.random() * 4) + 1)
-  randomNumberB = Math.floor((Math.random() * 13) + 1)
-  // randomnumber to 10 for +10 cards
-  if (randomNumberB > 10) {
-    randomD = randomNumberB - (randomNumberB - 10)
-  } else {
-    randomD = randomNumberB
-  }
-
-
-  // document.querySelector(".scoreP").innerHTML=randomNumberD
-}
 
 
 // startup of page, random cards assigned to both player and dealer, skipping the first card of the dealer and the player because it will be the first drawn card later.
@@ -96,7 +81,7 @@ function addScoreD() {
 // new game button , fully functional, random backcover on unturned cards, picks a random card for the first card of the dealer and the first 2 of the player.
 
 function newgamez() {
-cardcounterD=0
+cardcounterD=1
 cardcounterD++
   cardcounter = 0
   cardcounter++
@@ -115,7 +100,7 @@ cardcounterD++
       document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
     } else if (i < 1) {
       rollcard()
-      document.querySelector(".scoreD").innerHTML = randomNumberC
+      addScoreD()
       if (randomNumberB > 9) {
         document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
       } else {
@@ -197,10 +182,11 @@ function hit() {
 
 
 
-function stand() {
-  for (cardcounterD; DScore<17 && cardcounterD<7; cardcounterD++){
-  addScoreD()
+function standdraw() {
+  for (cardcounterD;  DScore<17 && cardcounterD<7; cardcounterD++){
     rollcard()
+    addScoreD()
+
   if (randomNumberB > 9) {
     document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
 
@@ -211,8 +197,29 @@ function stand() {
     document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
 
   }
-}
-}
+
+}}
+
+function stand(){
+standdraw()
+  if (DScore>Pscore && DScore<21){
+    document.querySelector(".winner").innerHTML="Dealer Wins"
+    alert("You lost.")}
+    else if(Pscore>DScore && Pscore<21){
+      document.querySelector(".winner").innerHTML="Player Wins"
+      alert("You win.")}
+
+      else if (DScore>21){
+        document.querySelector(".winner").innerHTML="Player Wins"
+        alert("You win.")}
+        else if (Pscore=DScore){
+        document.querySelector(".winner").innerHTML="Draw"
+        alert("Draw.")}
+      
+    }
+
+
+
 
 
 //stand - draw cards loop till 21+ if 21+ win, compare player score w dealer score if below
@@ -221,3 +228,8 @@ function stand() {
 
 
 // insurance
+
+
+
+
+// on new game money gets reset! change !
