@@ -84,8 +84,32 @@ function game() {
     }
   }
 }
+// new game without cards drawn
+function game2() {
+  for (i = 0; i < 12; i++) {
+
+      randomNumber1 = Math.floor((Math.random() * 4) + 1)
+      document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
+
+    }
+  }
 
 //resets variables and runs game function
+// function newgamez() {
+//   cardcounterD = 1
+//   cardcounterD++
+//   cardcounter = 0
+//   cardcounter++
+//   randomNumberC = 0
+//   bet = 0
+//   Pscore = 0
+//   DScore = 0
+//   insured = 0
+//   cardhit = 0
+//   game()
+// }
+
+// test function
 function newgamez() {
   cardcounterD = 1
   cardcounterD++
@@ -93,6 +117,21 @@ function newgamez() {
   cardcounter++
   randomNumberC = 0
   bet = 0
+  betz=0
+  Pscore = 0
+  DScore = 0
+  insured = 0
+  cardhit = 0
+  game2()
+}
+
+
+function newgamez2() {
+  cardcounterD = 1
+  cardcounterD++
+  cardcounter = 0
+  cardcounter++
+  randomNumberC = 0
   Pscore = 0
   DScore = 0
   insured = 0
@@ -114,6 +153,10 @@ function NewGame() {
 
 //bet functionality, targets all the buttons. checks for no more than $500 a bet and check for enough remaining money.
 function bets() {
+if (betz<1){
+  betz+1
+  newgamez2()
+
   if (cardhit < 1) {
     if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
       money = money - parseInt(event.target.innerHTML)
@@ -124,9 +167,21 @@ function bets() {
       alert("You don't have enough money.")
     } else {
       alert("You can't bet higher than $500.")
-    }
+    }}
   }
-};
+  else   if (cardhit < 1) {
+      if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
+        money = money - parseInt(event.target.innerHTML)
+        bet = bet + parseInt(event.target.innerHTML)
+        document.querySelector(".total").innerHTML = "Total money: $" + money
+        document.querySelector(".current").innerHTML = "Current bet: $" + bet
+      } else if (money < parseInt(event.target.innerHTML)) {
+        alert("You don't have enough money.")
+      } else {
+        alert("You can't bet higher than $500.")
+      }}
+    }
+;
 
 
 // draws cards and counts the score throuhg addscorep, once over 21 player lost, uses cardhit1 to make sure you cant place bets after draws.
