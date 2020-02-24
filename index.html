@@ -75,7 +75,7 @@
     <button type="button" name="button"  class="btn btn-outline-light btn-lg" onclick=hit()>Hit</button>
     <button type="button" name="button"  class="btn btn-outline-light btn-lg" onclick=stand()>Stand</button>
     <button type="button" name="button" class="btn btn-outline-light btn-lg">Split</button>
-      <button type="button" name="button" class="btn btn-outline-light btn-lg insurance" onclick=insurance2() >Insurance</button>
+      <button type="button" name="button" class="btn btn-outline-light btn-lg insurance" onclick=insurance() >Insurance</button>
 
     <div class="container-fluid">
 
@@ -87,11 +87,16 @@
     <button type="button" name="button"  class="btn btn-outline-light btn-lg bb"   onclick="bets(event)">50</button>
     <button type="button" name="button"  class="btn btn-outline-light btn-lg bb"   onclick="bets(event)">100</button>
   </div>
-    <div class="col-1" id="money">
-      <p class="total">Total money: $250</p>
-        <p class="current">Current bet: $0</p>
 
-  </div> </div> </div>
+
+  <div class="col-1" id="money"><button type="button" name="button"  class="btn btn-outline-light btn-lg bb bb1"   onclick="confirm()">Confirm</button></div>
+  <div class="col-1" id="money">
+
+    <p class="total">Total money: $250</p>
+      <p class="current">Current bet: $0</p>
+
+</div>
+ </div> </div>
 
 
     <button type="button" name="button"  class="btn btn-dark btn-lg newgame" onclick="NewGame(event)" >New Game</button>

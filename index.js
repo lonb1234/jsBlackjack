@@ -12,6 +12,8 @@ cardcounterD = 0
 var randomD = 0
 var insured = 0
 cardhit = 0
+conf=0
+betz=0
 
 
 // function rolls for cards, number 1-4 for color and 1-13 for card
@@ -122,6 +124,7 @@ function newgamez() {
   DScore = 0
   insured = 0
   cardhit = 0
+  conf=0
   game2()
 }
 
@@ -136,6 +139,7 @@ function newgamez2() {
   DScore = 0
   insured = 0
   cardhit = 0
+  conf=1
   game()
 }
 
@@ -153,9 +157,9 @@ function NewGame() {
 
 //bet functionality, targets all the buttons. checks for no more than $500 a bet and check for enough remaining money.
 function bets() {
-if (betz<1){
-  betz+1
-  newgamez2()
+if (conf==0){
+
+
 
   if (cardhit < 1) {
     if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
@@ -169,20 +173,24 @@ if (betz<1){
       alert("You can't bet higher than $500.")
     }}
   }
-  else   if (cardhit < 1) {
-      if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
-        money = money - parseInt(event.target.innerHTML)
-        bet = bet + parseInt(event.target.innerHTML)
-        document.querySelector(".total").innerHTML = "Total money: $" + money
-        document.querySelector(".current").innerHTML = "Current bet: $" + bet
-      } else if (money < parseInt(event.target.innerHTML)) {
-        alert("You don't have enough money.")
-      } else {
-        alert("You can't bet higher than $500.")
-      }}
+  // else   if (cardhit < 1) {
+  //     if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
+  //       money = money - parseInt(event.target.innerHTML)
+  //       bet = bet + parseInt(event.target.innerHTML)
+  //       document.querySelector(".total").innerHTML = "Total money: $" + money
+  //       document.querySelector(".current").innerHTML = "Current bet: $" + bet
+  //     } else if (money < parseInt(event.target.innerHTML)) {
+  //       alert("You don't have enough money.")
+  //     } else {
+  //       alert("You can't bet higher than $500.")
+  //     }}
     }
 ;
-
+function confirm(){
+  if (conf<1){
+  newgamez2()
+  conf=1}
+}
 
 // draws cards and counts the score throuhg addscorep, once over 21 player lost, uses cardhit1 to make sure you cant place bets after draws.
 // once 6 cards are drawn it automatically triggers the stand function
@@ -231,7 +239,7 @@ function standdraw() {
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
-  if (cardcounterD > 0) {
+  if (cardcounterD > 0 && conf==1) {
     standdraw()
     if (DScore > Pscore && DScore <= 21) {
       if (DScore = 21 && insured > 0) {
