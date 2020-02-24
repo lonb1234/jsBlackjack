@@ -144,13 +144,16 @@ function newgamez2() {
 }
 
 //confirmation of new game, removes money and runs newgamez script
-function NewGame() {
+function NewGame4() {
+
   var r = confirm("Are you certain you want to start a new game?");
   if (r == true) {
     document.querySelector(".total").innerHTML = "Total money: $250"
     document.querySelector(".current").innerHTML = "Current bet: $0"
     money = 250
     newgamez()
+  
+
   }
 }
 
@@ -186,7 +189,7 @@ if (conf==0){
   //     }}
     }
 ;
-function confirm(){
+function confirm2(){
   if (conf<1){
   newgamez2()
   conf=1}
