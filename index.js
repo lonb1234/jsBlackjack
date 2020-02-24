@@ -32,7 +32,8 @@ function rollcard() {
 for (i = 1; i < 12; i++) {
   if (i != 6) {
     randomNumber1 = Math.floor((Math.random() * 4) + 1)
-    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png")
+    newgamez();
   }
 }
 
@@ -152,7 +153,7 @@ function NewGame4() {
     document.querySelector(".current").innerHTML = "Current bet: $0"
     money = 250
     newgamez()
-  
+
 
   }
 }
@@ -198,6 +199,7 @@ function confirm2(){
 // draws cards and counts the score throuhg addscorep, once over 21 player lost, uses cardhit1 to make sure you cant place bets after draws.
 // once 6 cards are drawn it automatically triggers the stand function
 function hit() {
+  if (conf==1){
   cardhit = 1
   rollcard()
   if (cardcounter <= 4 && cardcounter > 0) {
@@ -220,10 +222,10 @@ function hit() {
       document.querySelector(".current").innerHTML = "Current bet: $" + bet;
     }
   }
-}
+
 if (cardcounter == 5) {
   stand()
-}
+}}}
 
 
 // function to draw cards for stand function
