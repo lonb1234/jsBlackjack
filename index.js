@@ -14,7 +14,8 @@ var insured = 0
 cardhit = 0
 conf=0
 betz=0
-
+Ace=0
+AceD=0
 
 // function rolls for cards, number 1-4 for color and 1-13 for card
 function rollcard() {
@@ -22,7 +23,11 @@ function rollcard() {
   randomNumberB = Math.floor((Math.random() * 13) + 1)
   if (randomNumberB > 10) {
     randomNumberC = randomNumberB - (randomNumberB - 10)
-  } else {
+  }
+  else if(randomNumberB==1)
+
+randomNumberC = randomNumberB - (randomNumberB + 10)
+   else {
     randomNumberC = randomNumberB
   }
 }
@@ -42,7 +47,15 @@ for (i = 1; i < 12; i++) {
 function addScoreP() {
   if (randomNumberB > 10) {
     randomNumberD = randomNumberB - (randomNumberB - 10)
-  } else {
+  }
+  else if(randomNumberB==1 && Pscore<12){
+    Ace++
+    randomNumberD = randomNumberB+10
+}
+    else if (randomNumberB==1 && Pscore>=12){
+        randomNumberD = randomNumberB
+  }
+   else {
     randomNumberD = randomNumberB
   }
   Pscore = Pscore + randomNumberD
@@ -54,7 +67,13 @@ function addScoreP() {
 function addScoreD() {
   if (randomNumberB > 10) {
     randomD = randomNumberB - (randomNumberB - 10)
-  } else {
+
+  }
+  else if(randomNumberB==1 ){
+    AceD++
+    randomD = randomNumberB
+}
+  else {
     randomD = randomNumberB
   }
   DScore = DScore + randomD
@@ -126,6 +145,8 @@ function newgamez() {
   insured = 0
   cardhit = 0
   conf=0
+  Ace=0
+  AceD=0
   game2()
 }
 
@@ -141,6 +162,8 @@ function newgamez2() {
   insured = 0
   cardhit = 0
   conf=1
+  Ace=0
+  Aced=0
   game()
 }
 
@@ -211,7 +234,12 @@ function hit() {
       document.querySelector(".cardp" + (cardcounter + 1)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
       addScoreP()
     }
-    if (Pscore > 21) {
+
+    if(Pscore>22 && Ace>0){
+      Pscore=Pscore-10
+      Ace--
+    }
+    else if (Pscore > 21) {
       alert("You lost.")
       setTimeout(function() {
         newgamez();
@@ -241,6 +269,9 @@ function standdraw() {
   }
 }
 
+
+// if aceD=1 & ranomnumber>9
+//
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
