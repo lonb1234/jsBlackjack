@@ -21,6 +21,16 @@ AceD=0
 function rollcard() {
   randomNumberA = Math.floor((Math.random() * 4) + 1)
   randomNumberB = Math.floor((Math.random() * 13) + 1)
+  // if(DScore>22 && AceD>0){
+  //   DScore=DScore-10
+  //   AceD--}
+
+//   if(randomNumberB==1 && DSCore<12){
+//    AceD++
+//    randomD = randomNumberB+10
+// }
+// else if (randomNumberB==1 && DScore>=12){
+//    randomD = randomNumberB}
   if (randomNumberB > 10) {
     randomNumberC = randomNumberB - (randomNumberB - 10)
   }
@@ -31,6 +41,8 @@ randomNumberC = randomNumberB - (randomNumberB + 10)
     randomNumberC = randomNumberB
   }
 }
+
+
 
 
 // startup of page, random cards assigned to both player and dealer, skipping the first card of the dealer and the player because it will be the first drawn card later.
@@ -71,8 +83,16 @@ function addScoreD() {
   }
   else if(randomNumberB==1 ){
     AceD++
-    randomD = randomNumberB
+    randomD = randomNumberB+10
 }
+
+else if(randomNumberB==1 &DScore>11 ){
+
+  randomD = randomNumberB
+}
+// else if (randomNumberB==1 && DScore>=12){
+//     randomD = randomNumberB
+// }
   else {
     randomD = randomNumberB
   }
@@ -163,7 +183,7 @@ function newgamez2() {
   cardhit = 0
   conf=1
   Ace=0
-  Aced=0
+  AceD=0
   game()
 }
 
@@ -258,16 +278,25 @@ if (cardcounter == 5) {
 
 // function to draw cards for stand function
 function standdraw() {
+
+
   for (cardcounterD; DScore < 17 && cardcounterD < 7; cardcounterD++) {
     rollcard()
     addScoreD()
+
     if (randomNumberB > 9) {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
     } else {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-    }
-  }
 }
+
+}
+
+
+
+}
+
+
 
 
 // if aceD=1 & ranomnumber>9
@@ -275,7 +304,7 @@ function standdraw() {
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
-  if (cardcounterD > 0 && conf==1) {
+  if (cardcounterD > 0 && conf==1 && AceD==0) {
     standdraw()
     if (DScore > Pscore && DScore <= 21) {
       if (DScore = 21 && insured > 0) {
@@ -350,3 +379,27 @@ function insurance2() {
     }
   }
 }
+
+
+
+
+
+
+
+// function blackjack(){
+//   if (document.querySelector(".card1").getAttribute('src')==='images/PNG/1-01.png' || 'images/PNG/2-01.png' || 'images/PNG/3-01.png' || 'images/PNG/4-01.png' &&
+// Document.querySelector(".card2").getAttribute('src')===
+// 'images/PNG/1-10.png' || 'images/PNG/1-11.png' || 'images/PNG/1-12.png' || 'images/PNG/1-13.png' ||
+// 'images/PNG/2-10.png' || 'images/PNG/2-11.png' || 'images/PNG/2-12.png' || 'images/PNG/2-13.png' ||
+// 'images/PNG/3-10.png' || 'images/PNG/3-11.png' || 'images/PNG/3-12.png' || 'images/PNG/3-13.png' ||
+// 'images/PNG/4-10.png' || 'images/PNG/4-11.png' || 'images/PNG/4-12.png' || 'images/PNG/4-13.png')
+// {alert("blackjack")}
+// else if  (document.querySelector(".card2").getAttribute('src')==='images/PNG/1-01.png' || 'images/PNG/2-01.png' || 'images/PNG/3-01.png' || 'images/PNG/4-01.png' &&
+// Document.querySelector(".card1").getAttribute('src')===
+// 'images/PNG/1-10.png' || 'images/PNG/1-11.png' || 'images/PNG/1-12.png' || 'images/PNG/1-13.png' ||
+// 'images/PNG/2-10.png' || 'images/PNG/2-11.png' || 'images/PNG/2-12.png' || 'images/PNG/2-13.png' ||
+// 'images/PNG/3-10.png' || 'images/PNG/3-11.png' || 'images/PNG/3-12.png' || 'images/PNG/3-13.png' ||
+// 'images/PNG/4-10.png' || 'images/PNG/4-11.png' || 'images/PNG/4-12.png' || 'images/PNG/4-13.png')
+// {alert("blackjack")}}
+// // alert("hello")}
+// // else{alert("bye")}
