@@ -21,16 +21,7 @@ AceD=0
 function rollcard() {
   randomNumberA = Math.floor((Math.random() * 4) + 1)
   randomNumberB = Math.floor((Math.random() * 13) + 1)
-  // if(DScore>22 && AceD>0){
-  //   DScore=DScore-10
-  //   AceD--}
 
-//   if(randomNumberB==1 && DSCore<12){
-//    AceD++
-//    randomD = randomNumberB+10
-// }
-// else if (randomNumberB==1 && DScore>=12){
-//    randomD = randomNumberB}
   if (randomNumberB > 10) {
     randomNumberC = randomNumberB - (randomNumberB - 10)
   }
@@ -39,6 +30,7 @@ function rollcard() {
 randomNumberC = randomNumberB - (randomNumberB + 10)
    else {
     randomNumberC = randomNumberB
+
   }
 }
 
@@ -77,6 +69,7 @@ function addScoreP() {
 
 // adding scores for dealer
 function addScoreD() {
+
   if (randomNumberB > 10) {
     randomD = randomNumberB - (randomNumberB - 10)
 
@@ -88,7 +81,7 @@ function addScoreD() {
     randomD = randomNumberB+10
 }
 
-else if(randomNumberB==1 &DScore>11 ){
+else if(randomNumberB==1 &DScore>10 ){
 
   randomD = randomNumberB
 }
@@ -98,7 +91,14 @@ else if(randomNumberB==1 &DScore>11 ){
   else {
     randomD = randomNumberB
   }
+
+
+
   DScore = DScore + randomD
+  if (DScore>21 & AceD>0){
+    AceD--
+    DScore=DScore-10
+  }
   document.querySelector(".scoreD ").innerHTML = DScore
 }
 
@@ -138,20 +138,6 @@ function game2() {
     }
   }
 
-//resets variables and runs game function
-// function newgamez() {
-//   cardcounterD = 1
-//   cardcounterD++
-//   cardcounter = 0
-//   cardcounter++
-//   randomNumberC = 0
-//   bet = 0
-//   Pscore = 0
-//   DScore = 0
-//   insured = 0
-//   cardhit = 0
-//   game()
-// }
 
 // test function
 function newgamez() {
@@ -306,12 +292,18 @@ function standdraw2() {
 
   for (cardcounterD; DScore < counterc && cardcounterD < 7; cardcounterD++) {
     rollcard()
-    if (AceD=>1){counterc+10}
 
+
+  if (AceD=>1){counterc+10};
+//   if (DScore=>11 && AceD>0){
+// DScore-10
+// randomD-10
+//     counterc-10
+//     AceD--
+//   };
     addScoreD()
-  if (DScore>21 && AceD>0){
-    counterc-10
-    AceD--}
+
+
 
     if (randomNumberB > 9) {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
@@ -333,7 +325,13 @@ function standdraw2() {
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
-  if (cardcounterD > 0 && conf==1 && AceD==0) {
+
+  if (DScore>21 && AceD>0)
+  {DScore-10
+  AceD--
+  standdraw2()}
+  else if (cardcounterD > 0 && conf==1 && AceD==0) {
+
     standdraw2()
 
     if (DScore > Pscore && DScore <= 21) {
