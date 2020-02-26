@@ -81,6 +81,8 @@ function addScoreD() {
     randomD = randomNumberB - (randomNumberB - 10)
 
   }
+
+
   else if(randomNumberB==1 ){
     AceD++
     randomD = randomNumberB+10
@@ -296,6 +298,33 @@ function standdraw() {
 
 }
 
+// test variables
+var counterc=17
+// test2
+function standdraw2() {
+
+
+  for (cardcounterD; DScore < counterc && cardcounterD < 7; cardcounterD++) {
+    rollcard()
+    if (AceD=>1){counterc+10}
+
+    addScoreD()
+  if (DScore>21 && AceD>0){
+    counterc-10
+    AceD--}
+
+    if (randomNumberB > 9) {
+      document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+    } else {
+      document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+}
+
+}
+
+
+
+}
+
 
 
 
@@ -305,7 +334,8 @@ function standdraw() {
 // and adding or removing the bet money
 function stand() {
   if (cardcounterD > 0 && conf==1 && AceD==0) {
-    standdraw()
+    standdraw2()
+
     if (DScore > Pscore && DScore <= 21) {
       if (DScore = 21 && insured > 0) {
         alert("You lost.")
@@ -359,7 +389,66 @@ function stand() {
     document.querySelector(".total").innerHTML = "Total money: $" + money
     document.querySelector(".current").innerHTML = "Current bet: $" + bet
   }
-}
+
+ //
+ // test
+  else if (cardcounterD > 0 && conf==1 && AceD>0) {
+    standdraw2()
+    if (DScore > Pscore && DScore <= 21) {
+      if (DScore = 21 && insured > 0) {
+        alert("You lost.")
+        setTimeout(function() {
+          newgamez();
+        }, 700)
+        money = money + (bet * 0.75)
+        bet = 0
+        document.querySelector(".total").innerHTML = "Total money: $" + money
+        document.querySelector(".current").innerHTML = "Current bet: $" + bet
+      } else {
+        document.querySelector(".winner").innerHTML = "Dealer Wins"
+        alert("You lost.")
+        setTimeout(function() {
+          newgamez();
+        }, 700)
+        money = money
+        bet = 0
+        document.querySelector(".total").innerHTML = "Total money: $" + money
+        document.querySelector(".current").innerHTML = "Current bet: $" + bet
+      }
+    } else if (Pscore > DScore && Pscore <= 21) {
+      document.querySelector(".winner").innerHTML = "Player Wins"
+      alert("You win.")
+      setTimeout(function() {
+        newgamez();
+      }, 700)
+      money = money + (bet * 2)
+      bet = 0
+      document.querySelector(".total").innerHTML = "Total money: $" + money
+      document.querySelector(".current").innerHTML = "Current bet: $" + bet
+    } else if (DScore > 21) {
+      document.querySelector(".winner").innerHTML = "Player Wins"
+      alert("You win.")
+      setTimeout(function() {
+        newgamez();
+      }, 700)
+      money = money + (bet * 2)
+      bet = 0
+      document.querySelector(".total").innerHTML = "Total money: $" + money
+      document.querySelector(".current").innerHTML = "Current bet: $" + bet
+    } else if (Pscore = DScore) {
+      document.querySelector(".winner").innerHTML = "Draw"
+      alert("Draw.")
+      setTimeout(function() {
+        newgamez();
+      }, 700);
+    }
+    money = money + bet
+    bet = 0
+    document.querySelector(".total").innerHTML = "Total money: $" + money
+    document.querySelector(".current").innerHTML = "Current bet: $" + bet
+  }
+  }
+
 
 
 // Split
