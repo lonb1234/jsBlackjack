@@ -12,10 +12,10 @@ cardcounterD = 0
 var randomD = 0
 var insured = 0
 cardhit = 0
-conf=0
-betz=0
-Ace=0
-AceD=0
+conf = 0
+betz = 0
+Ace = 0
+AceD = 0
 
 // function rolls for cards, number 1-4 for color and 1-13 for card
 function rollcard() {
@@ -24,13 +24,11 @@ function rollcard() {
 
   if (randomNumberB > 10) {
     randomNumberC = randomNumberB - (randomNumberB - 10)
-  }
-  else if(randomNumberB==1)
+  } else if (randomNumberB == 1)
 
-randomNumberC = randomNumberB - (randomNumberB + 10)
-   else {
+    randomNumberC = randomNumberB - (randomNumberB + 10)
+  else {
     randomNumberC = randomNumberB
-
   }
 }
 
@@ -51,15 +49,12 @@ for (i = 1; i < 12; i++) {
 function addScoreP() {
   if (randomNumberB > 10) {
     randomNumberD = randomNumberB - (randomNumberB - 10)
-  }
-  else if(randomNumberB==1 && Pscore<12){
+  } else if (randomNumberB == 1 && Pscore < 12) {
     Ace++
-    randomNumberD = randomNumberB+10
-}
-    else if (randomNumberB==1 && Pscore>=12){
-        randomNumberD = randomNumberB
-  }
-   else {
+    randomNumberD = randomNumberB + 10
+  } else if (randomNumberB == 1 && Pscore >= 12) {
+    randomNumberD = randomNumberB
+  } else {
     randomNumberD = randomNumberB
   }
   Pscore = Pscore + randomNumberD
@@ -72,36 +67,23 @@ function addScoreD() {
 
   if (randomNumberB > 10) {
     randomD = randomNumberB - (randomNumberB - 10)
-
-  }
-
-
-  else if(randomNumberB==1 ){
+  } else if (randomNumberB == 1) {
     AceD++
-    randomD = randomNumberB+10
-}
+    randomD = randomNumberB + 10
+  } else if (randomNumberB == 1 & DScore > 10) {
 
-else if(randomNumberB==1 &DScore>10 ){
-
-  randomD = randomNumberB
-}
-// else if (randomNumberB==1 && DScore>=12){
-//     randomD = randomNumberB
-// }
-  else {
+    randomD = randomNumberB
+  } else {
     randomD = randomNumberB
   }
-
-
-
+  // lowers A value >21
   DScore = DScore + randomD
-  if (DScore>21 & AceD>0){
+  if (DScore > 21 & AceD > 0) {
     AceD--
-    DScore=DScore-10
+    DScore = DScore - 10
   }
   document.querySelector(".scoreD ").innerHTML = DScore
 }
-
 
 // new game function, assigns random cards and counts the score
 function game() {
@@ -128,15 +110,16 @@ function game() {
     }
   }
 }
+
 // new game without cards drawn
 function game2() {
   for (i = 0; i < 12; i++) {
 
-      randomNumber1 = Math.floor((Math.random() * 4) + 1)
-      document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
+    randomNumber1 = Math.floor((Math.random() * 4) + 1)
+    document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
 
-    }
   }
+}
 
 
 // test function
@@ -147,14 +130,14 @@ function newgamez() {
   cardcounter++
   randomNumberC = 0
   bet = 0
-  betz=0
+  betz = 0
   Pscore = 0
   DScore = 0
   insured = 0
   cardhit = 0
-  conf=0
-  Ace=0
-  AceD=0
+  conf = 0
+  Ace = 0
+  AceD = 0
   game2()
 }
 
@@ -169,9 +152,9 @@ function newgamez2() {
   DScore = 0
   insured = 0
   cardhit = 0
-  conf=1
-  Ace=0
-  AceD=0
+  conf = 1
+  Ace = 0
+  AceD = 0
   game()
 }
 
@@ -184,156 +167,110 @@ function NewGame4() {
     document.querySelector(".current").innerHTML = "Current bet: $0"
     money = 250
     newgamez()
-
-
   }
 }
 
-
 //bet functionality, targets all the buttons. checks for no more than $500 a bet and check for enough remaining money.
 function bets() {
-if (conf==0){
-
-
-
-  if (cardhit < 1) {
-    if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
-      money = money - parseInt(event.target.innerHTML)
-      bet = bet + parseInt(event.target.innerHTML)
-      document.querySelector(".total").innerHTML = "Total money: $" + money
-      document.querySelector(".current").innerHTML = "Current bet: $" + bet
-    } else if (money < parseInt(event.target.innerHTML)) {
-      alert("You don't have enough money.")
-    } else {
-      alert("You can't bet higher than $500.")
-    }}
-  }
-  // else   if (cardhit < 1) {
-  //     if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
-  //       money = money - parseInt(event.target.innerHTML)
-  //       bet = bet + parseInt(event.target.innerHTML)
-  //       document.querySelector(".total").innerHTML = "Total money: $" + money
-  //       document.querySelector(".current").innerHTML = "Current bet: $" + bet
-  //     } else if (money < parseInt(event.target.innerHTML)) {
-  //       alert("You don't have enough money.")
-  //     } else {
-  //       alert("You can't bet higher than $500.")
-  //     }}
+  if (conf == 0) {
+    if (cardhit < 1) {
+      if (money > parseInt(event.target.innerHTML) - 1 && bet + parseInt(event.target.innerHTML) < 501) {
+        money = money - parseInt(event.target.innerHTML)
+        bet = bet + parseInt(event.target.innerHTML)
+        document.querySelector(".total").innerHTML = "Total money: $" + money
+        document.querySelector(".current").innerHTML = "Current bet: $" + bet
+      } else if (money < parseInt(event.target.innerHTML)) {
+        alert("You don't have enough money.")
+      } else {
+        alert("You can't bet higher than $500.")
+      }
     }
-;
-function confirm2(){
-  if (conf<1){
-  newgamez2()
-  conf=1}
+  }
+};
+
+function confirm2() {
+  if (conf < 1) {
+    newgamez2()
+    conf = 1
+  }
 }
 
 // draws cards and counts the score throuhg addscorep, once over 21 player lost, uses cardhit1 to make sure you cant place bets after draws.
 // once 6 cards are drawn it automatically triggers the stand function
 function hit() {
-  if (conf==1){
-  cardhit = 1
-  rollcard()
-  if (cardcounter <= 4 && cardcounter > 0) {
-    cardcounter++
-    if (randomNumberB > 9) {
-      document.querySelector(".cardp" + (cardcounter + 1)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
-      addScoreP()
-    } else {
-      document.querySelector(".cardp" + (cardcounter + 1)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
-      addScoreP()
+  if (conf == 1) {
+    cardhit = 1
+    rollcard()
+    if (cardcounter <= 4 && cardcounter > 0) {
+      cardcounter++
+      if (randomNumberB > 9) {
+        document.querySelector(".cardp" + (cardcounter + 1)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
+        addScoreP()
+      } else {
+        document.querySelector(".cardp" + (cardcounter + 1)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+        addScoreP()
+      }
+      if (Pscore > 21 && Ace > 0) {
+        Pscore = Pscore - 10
+        Ace--
+      } else if (Pscore > 21) {
+        alert("You lost.")
+        setTimeout(function() {
+          newgamez();
+        }, 700)
+        money = money
+        bet = 0
+        document.querySelector(".total").innerHTML = "Total money: $" + money
+        document.querySelector(".current").innerHTML = "Current bet: $" + bet;
+      }
     }
-
-    if(Pscore>22 && Ace>0){
-      Pscore=Pscore-10
-      Ace--
-    }
-    else if (Pscore > 21) {
-      alert("You lost.")
-      setTimeout(function() {
-        newgamez();
-      }, 700)
-      money = money
-      bet = 0
-      document.querySelector(".total").innerHTML = "Total money: $" + money
-      document.querySelector(".current").innerHTML = "Current bet: $" + bet;
+    if (cardcounter == 5) {
+      stand()
     }
   }
-
-if (cardcounter == 5) {
-  stand()
-}}}
+}
 
 
 // function to draw cards for stand function
 function standdraw() {
-
-
   for (cardcounterD; DScore < 17 && cardcounterD < 7; cardcounterD++) {
     rollcard()
     addScoreD()
-
     if (randomNumberB > 9) {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
     } else {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+    }
+  }
 }
 
-}
+// variable that allows A to have 2 values
+var counterc = 17
 
-
-
-}
-
-// test variables
-var counterc=17
-// test2
 function standdraw2() {
-
-
   for (cardcounterD; DScore < counterc && cardcounterD < 7; cardcounterD++) {
     rollcard()
-
-
-  if (AceD=>1){counterc+10};
-//   if (DScore=>11 && AceD>0){
-// DScore-10
-// randomD-10
-//     counterc-10
-//     AceD--
-//   };
+    if (AceD => 1) {
+      counterc + 10
+    };
     addScoreD()
-
-
-
     if (randomNumberB > 9) {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-" + randomNumberB + ".png");
     } else {
       document.querySelector(".card" + (cardcounterD)).setAttribute("src", "images/PNG/" + randomNumberA + "-0" + randomNumberB + ".png");
+    }
+  }
 }
 
-}
-
-
-
-}
-
-
-
-
-// if aceD=1 & ranomnumber>9
-//
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
-
-  if (DScore>21 && AceD>0)
-  {DScore-10
-  AceD--
-  standdraw2()}
-  else if (cardcounterD > 0 && conf==1 && AceD==0) {
-
+  if (DScore > 21 && AceD > 0) {
+    DScore - 10
+    AceD--
     standdraw2()
-
+  } else if (cardcounterD > 0 && conf == 1 && AceD == 0) {
+    standdraw2()
     if (DScore > Pscore && DScore <= 21) {
       if (DScore = 21 && insured > 0) {
         alert("You lost.")
@@ -386,11 +323,7 @@ function stand() {
     bet = 0
     document.querySelector(".total").innerHTML = "Total money: $" + money
     document.querySelector(".current").innerHTML = "Current bet: $" + bet
-  }
-
- //
- // test
-  else if (cardcounterD > 0 && conf==1 && AceD>0) {
+  } else if (cardcounterD > 0 && conf == 1 && AceD > 0) {
     standdraw2()
     if (DScore > Pscore && DScore <= 21) {
       if (DScore = 21 && insured > 0) {
@@ -445,7 +378,7 @@ function stand() {
     document.querySelector(".total").innerHTML = "Total money: $" + money
     document.querySelector(".current").innerHTML = "Current bet: $" + bet
   }
-  }
+}
 
 
 
@@ -466,10 +399,6 @@ function insurance2() {
     }
   }
 }
-
-
-
-
 
 
 
