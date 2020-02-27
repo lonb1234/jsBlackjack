@@ -391,21 +391,22 @@ function stand() {
 
 // double down
 
-function doubledown(){
-  if(money>=bet){
-money=money-bet
-bet=bet+bet
-hit()
-if (Pscore<22)
-stand()
-}
-else{alert("Not enough money!")}
+function doubledown() {
+  if (money >= bet) {
+    money = money - bet
+    bet = bet + bet
+    hit()
+    if (Pscore < 22)
+      stand()
+  } else {
+    alert("Not enough money!")
+  }
 }
 
 // buys an insurance for 50% of the bet and checks if there's enough money. only usable once an A is drawn. not fully functional yet. insurance also triggers once
 // 21 is reached without a blackjack.
 function insurance2() {
-  if (DScore = 1 && insured < 1 && cardcounterD==2) {
+  if (DScore = 1 && insured < 1 && cardcounterD == 2) {
     if (money > (bet * 0.5)) {
       money = money - (bet * 0.5)
       bet = bet + (bet * 0.5)
@@ -416,23 +417,3 @@ function insurance2() {
     }
   }
 }
-
-
-
-// function blackjack(){
-//   if (document.querySelector(".card1").getAttribute('src')==='images/PNG/1-01.png' || 'images/PNG/2-01.png' || 'images/PNG/3-01.png' || 'images/PNG/4-01.png' &&
-// Document.querySelector(".card2").getAttribute('src')===
-// 'images/PNG/1-10.png' || 'images/PNG/1-11.png' || 'images/PNG/1-12.png' || 'images/PNG/1-13.png' ||
-// 'images/PNG/2-10.png' || 'images/PNG/2-11.png' || 'images/PNG/2-12.png' || 'images/PNG/2-13.png' ||
-// 'images/PNG/3-10.png' || 'images/PNG/3-11.png' || 'images/PNG/3-12.png' || 'images/PNG/3-13.png' ||
-// 'images/PNG/4-10.png' || 'images/PNG/4-11.png' || 'images/PNG/4-12.png' || 'images/PNG/4-13.png')
-// {alert("blackjack")}
-// else if  (document.querySelector(".card2").getAttribute('src')==='images/PNG/1-01.png' || 'images/PNG/2-01.png' || 'images/PNG/3-01.png' || 'images/PNG/4-01.png' &&
-// Document.querySelector(".card1").getAttribute('src')===
-// 'images/PNG/1-10.png' || 'images/PNG/1-11.png' || 'images/PNG/1-12.png' || 'images/PNG/1-13.png' ||
-// 'images/PNG/2-10.png' || 'images/PNG/2-11.png' || 'images/PNG/2-12.png' || 'images/PNG/2-13.png' ||
-// 'images/PNG/3-10.png' || 'images/PNG/3-11.png' || 'images/PNG/3-12.png' || 'images/PNG/3-13.png' ||
-// 'images/PNG/4-10.png' || 'images/PNG/4-11.png' || 'images/PNG/4-12.png' || 'images/PNG/4-13.png')
-// {alert("blackjack")}}
-// // alert("hello")}
-// // else{alert("bye")}
