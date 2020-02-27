@@ -58,6 +58,10 @@ function addScoreP() {
     randomNumberD = randomNumberB
   }
   Pscore = Pscore + randomNumberD
+  if (Pscore > 21 & Ace > 0) {
+    Ace--
+    Pscore = Pscore - 10
+  }
   document.querySelector(".scoreP ").innerHTML = Pscore
 }
 
@@ -217,7 +221,7 @@ function hit() {
         alert("You lost.")
         setTimeout(function() {
           newgamez();
-        }, 700)
+        }, 1500)
         money = money
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -276,7 +280,7 @@ function stand() {
         alert("You lost.")
         setTimeout(function() {
           newgamez();
-        }, 700)
+        }, 1500)
         money = money + (bet * 0.75)
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -286,7 +290,7 @@ function stand() {
         alert("You lost.")
         setTimeout(function() {
           newgamez();
-        }, 700)
+        }, 1500)
         money = money
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -297,7 +301,7 @@ function stand() {
       alert("You win.")
       setTimeout(function() {
         newgamez();
-      }, 700)
+      }, 1500)
       money = money + (bet * 2)
       bet = 0
       document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -307,7 +311,7 @@ function stand() {
       alert("You win.")
       setTimeout(function() {
         newgamez();
-      }, 700)
+      }, 1500)
       money = money + (bet * 2)
       bet = 0
       document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -317,7 +321,7 @@ function stand() {
       alert("Draw.")
       setTimeout(function() {
         newgamez();
-      }, 700);
+      }, 1500);
     }
     money = money + bet
     bet = 0
@@ -330,7 +334,7 @@ function stand() {
         alert("You lost.")
         setTimeout(function() {
           newgamez();
-        }, 700)
+        }, 1500)
         money = money + (bet * 0.75)
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -340,7 +344,7 @@ function stand() {
         alert("You lost.")
         setTimeout(function() {
           newgamez();
-        }, 700)
+        }, 1500)
         money = money
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -351,7 +355,7 @@ function stand() {
       alert("You win.")
       setTimeout(function() {
         newgamez();
-      }, 700)
+      }, 1500)
       money = money + (bet * 2)
       bet = 0
       document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -361,7 +365,7 @@ function stand() {
       alert("You win.")
       setTimeout(function() {
         newgamez();
-      }, 700)
+      }, 1500)
       money = money + (bet * 2)
       bet = 0
       document.querySelector(".total").innerHTML = "Total money: $" + money
@@ -371,7 +375,7 @@ function stand() {
       alert("Draw.")
       setTimeout(function() {
         newgamez();
-      }, 700);
+      }, 1500);
     }
     money = money + bet
     bet = 0
@@ -384,6 +388,19 @@ function stand() {
 
 // Split
 
+
+// double down
+
+function doubledown(){
+  if(money>=bet){
+money=money-bet
+bet=bet+bet
+hit()
+if (Pscore<22)
+stand()
+}
+else{alert("Not enough money!")}
+}
 
 // buys an insurance for 50% of the bet and checks if there's enough money. only usable once an A is drawn. not fully functional yet. insurance also triggers once
 // 21 is reached without a blackjack.
