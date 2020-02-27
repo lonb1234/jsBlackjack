@@ -1,3 +1,5 @@
+//javascript for the blackjack game.
+
 // variables
 var money = 250
 var bet = 0
@@ -17,6 +19,7 @@ betz = 0
 Ace = 0
 AceD = 0
 
+
 // function rolls for cards, number 1-4 for color and 1-13 for card
 function rollcard() {
   randomNumberA = Math.floor((Math.random() * 4) + 1)
@@ -31,8 +34,6 @@ function rollcard() {
     randomNumberC = randomNumberB
   }
 }
-
-
 
 
 // startup of page, random cards assigned to both player and dealer, skipping the first card of the dealer and the player because it will be the first drawn card later.
@@ -68,7 +69,6 @@ function addScoreP() {
 
 // adding scores for dealer
 function addScoreD() {
-
   if (randomNumberB > 10) {
     randomD = randomNumberB - (randomNumberB - 10)
   } else if (randomNumberB == 1) {
@@ -88,6 +88,7 @@ function addScoreD() {
   }
   document.querySelector(".scoreD ").innerHTML = DScore
 }
+
 
 // new game function, assigns random cards and counts the score
 function game() {
@@ -115,13 +116,12 @@ function game() {
   }
 }
 
+
 // new game without cards drawn
 function game2() {
   for (i = 0; i < 12; i++) {
-
     randomNumber1 = Math.floor((Math.random() * 4) + 1)
     document.querySelectorAll(".card")[i].setAttribute("src", "images/PNG/s" + randomNumber1 + ".png");
-
   }
 }
 
@@ -162,9 +162,9 @@ function newgamez2() {
   game()
 }
 
+
 //confirmation of new game, removes money and runs newgamez script
 function NewGame4() {
-
   var r = confirm("Are you certain you want to start a new game?");
   if (r == true) {
     document.querySelector(".total").innerHTML = "Total money: $250"
@@ -173,6 +173,7 @@ function NewGame4() {
     newgamez()
   }
 }
+
 
 //bet functionality, targets all the buttons. checks for no more than $500 a bet and check for enough remaining money.
 function bets() {
@@ -192,12 +193,14 @@ function bets() {
   }
 };
 
+
 function confirm2() {
   if (conf < 1) {
     newgamez2()
     conf = 1
   }
 }
+
 
 // draws cards and counts the score throuhg addscorep, once over 21 player lost, uses cardhit1 to make sure you cant place bets after draws.
 // once 6 cards are drawn it automatically triggers the stand function
@@ -231,6 +234,8 @@ function hit() {
     if (cardcounter == 5) {
       stand()
     }
+  } else {
+    alert("First place a bet.")
   }
 }
 
@@ -247,6 +252,7 @@ function standdraw() {
     }
   }
 }
+
 
 // variable that allows A to have 2 values
 var counterc = 17
@@ -266,6 +272,7 @@ function standdraw2() {
   }
 }
 
+
 // the stand function, it uses standdraw to draw cards, then checks the specified variables to see the outcome, after it starts a new round after 0.7 seconds
 // and adding or removing the bet money
 function stand() {
@@ -281,7 +288,7 @@ function stand() {
         setTimeout(function() {
           newgamez();
         }, 1500)
-        money = money + (bet * 0.75)
+        money = money + (bet)
         bet = 0
         document.querySelector(".total").innerHTML = "Total money: $" + money
         document.querySelector(".current").innerHTML = "Current bet: $" + bet
@@ -381,7 +388,7 @@ function stand() {
     bet = 0
     document.querySelector(".total").innerHTML = "Total money: $" + money
     document.querySelector(".current").innerHTML = "Current bet: $" + bet
-  }
+  } else(alert("First place a bet."))
 }
 
 
@@ -392,28 +399,32 @@ function stand() {
 // double down
 
 function doubledown() {
-  if (money >= bet) {
+  if (money >= bet && conf == 1) {
     money = money - bet
     bet = bet + bet
     hit()
     if (Pscore < 22)
       stand()
-  } else {
+  } else if (conf == 1) {
     alert("Not enough money!")
+  } else {
+    alert("First place a bet.")
   }
 }
+
 
 // buys an insurance for 50% of the bet and checks if there's enough money. only usable once an A is drawn. not fully functional yet. insurance also triggers once
 // 21 is reached without a blackjack.
 function insurance2() {
-  if (DScore = 1 && insured < 1 && cardcounterD == 2) {
+  if (DScore == 11 && insured < 1) {
     if (money > (bet * 0.5)) {
       money = money - (bet * 0.5)
-      bet = bet + (bet * 0.5)
       insured = 1
       document.querySelector(".total").innerHTML = "Total money: $" + money
     } else if (money < (bet * 0.5)) {
       alert("You don't have enough money.")
     }
+  } else {
+    alert("Can't buy an insurance right now.")
   }
 }
