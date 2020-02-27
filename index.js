@@ -405,7 +405,7 @@ else{alert("Not enough money!")}
 // buys an insurance for 50% of the bet and checks if there's enough money. only usable once an A is drawn. not fully functional yet. insurance also triggers once
 // 21 is reached without a blackjack.
 function insurance2() {
-  if (DScore = 1 && insured < 1) {
+  if (DScore = 1 && insured < 1 && cardcounterD==2) {
     if (money > (bet * 0.5)) {
       money = money - (bet * 0.5)
       bet = bet + (bet * 0.5)
